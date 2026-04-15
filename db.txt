@@ -1,0 +1,57 @@
+mysql -u root -p
+
+
+CREATE DATABASE aifest2026;
+
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    name VARCHAR(100) NOT NULL,
+    dept VARCHAR(100),
+    section VARCHAR(50),
+    student_id VARCHAR(50),
+
+    gender VARCHAR(10),
+    image VARCHAR(255),
+
+    participation_code VARCHAR(50) UNIQUE,
+    password VARCHAR(255) NOT NULL,
+
+    fee INT DEFAULT 0,
+    booth INT DEFAULT 0,
+
+    role ENUM('user','leader','volunteer') DEFAULT 'user',
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+CREATE TABLE cart (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    product_name VARCHAR(100),
+    product_image VARCHAR(255),
+    price INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+CREATE TABLE group_members (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    group_id INT,
+    user_id INT,
+    participation_code VARCHAR(50),
+    status ENUM('active','removed') DEFAULT 'active',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE groups (
+    group_id INT AUTO_INCREMENT PRIMARY KEY,
+    group_name VARCHAR(100),
+    leader_id INT,
+    group_logo VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
